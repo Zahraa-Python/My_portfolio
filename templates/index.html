@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- قراءة ملف التنسيق مباشرة من مجلد static الرئيسي لتضمن الألوان -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar">
+        <div class="logo">My Portfolio</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- قسم عني -->
+    <section id="about" class="container">
+        <h1>About Me</h1>
+        <p>I am learning Python programming and web development. I enjoy creating useful applications and improving my skills.</p>
+    </section>
+
+    <!-- قسم المهارات المطور لقراءة القائمة ديناميكياً من بايثون -->
+    <section id="skills" class="container">
+        <h2>My Skills</h2>
+        <div class="skills-grid">
+            {% for skill in skills %}
+            <span class="badge">{{ skill }}</span>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- قسم المشاريع المطور لمطابقة التسميات وقراءة الصور من static مباشرة -->
+    <section id="projects" class="container">
+        <h2>My Projects</h2>
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="card">
+                <!-- جلب الصورة من مجلد static الرئيسي مباشرة لتظهر كاملة 100% -->
+                <img src="{{ url_for('static', filename=project.image) }}" alt="{{ project.title }}" class="project-img" style="width:100%; height:180px; object-fit:contain; background-color:#fcfcfc; border-radius:6px; margin-bottom:15px;">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                <span class="tech">Built with: {{ project.tech_stack }}</span>
+                <a href="https://github.com" target="_blank" class="project-link">View on GitHub</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- قسم التواصل والتذييل -->
+    <section id="contact" class="container">
+        <h2>Contact Me</h2>
+        <p>Thank you for visiting my portfolio. Feel free to reach out!</p>
+        <div class="contact-links">
+            <a href="mailto:your-email@example.com" class="btn">Send Email</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 My Portfolio. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
